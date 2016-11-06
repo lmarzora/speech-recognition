@@ -4,7 +4,8 @@
 1. Instalar Octave
 	* apt-get install octave liboctave-dev
 	* liboctave-dev es necesario para instalar paquetes de Octave Forge
-
+2. Instalar la libreria signal
+	* (en Octave) pkg install -forge audio
 
 ### Recorder
 1. Instalar el paquete de audio 

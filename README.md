@@ -31,3 +31,7 @@
 5. Utilizar la funcion recorder
 	recorder(fileName, seconds, samplingFrecuency)	
 
+### Links
+[mfcc](http://practicalcryptography.com/miscellaneous/machine-learning/guide-mel-frequency-cepstral-coefficients-mfccs/)
+[VQ](http://www.data-compression.com/vq.shtml)
+

@@ -10,11 +10,11 @@
 
 ## Reconocimiento de voz
 ### Agregar una persona
-	1. poner muestras de entrenamiento (wav) de subJectName en data/training/subjectName/
-	2. ejecutar addSpeaker(subjectName)
+1. poner muestras de entrenamiento (wav) de subJectName en data/training/subjectName/
+2. ejecutar addSpeaker(subjectName)
 ### Reconocer una muestra
-	1. poner la muestra (wav) en data/test/
-	2. ejecutar recognizeSpeaker(sampleName) 
+1. poner la muestra (wav) en data/test/
+2. ejecutar recognizeSpeaker(sampleName) 
 
 
 ### Recorder

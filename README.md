@@ -9,12 +9,12 @@
 	* hay que instalar las dependecias de signal io y control
 
 ## Reconocimiento de voz
-	### Agregar una persona
-	* poner muestras de entrenamiento (wav) de subJectName en data/training/subjectName/
-	* ejecutar addSpeaker(subjectName)
-	### Reconocer una muestra
-	* poner la muestra (wav) en data/test/
-	* ejecutar recognizeSpeaker(sampleName) 
+### Agregar una persona
+	1. poner muestras de entrenamiento (wav) de subJectName en data/training/subjectName/
+	2. ejecutar addSpeaker(subjectName)
+### Reconocer una muestra
+	1. poner la muestra (wav) en data/test/
+	2. ejecutar recognizeSpeaker(sampleName) 
 
 
 ### Recorder

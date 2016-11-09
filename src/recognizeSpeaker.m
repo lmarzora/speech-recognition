@@ -1,4 +1,4 @@
-function name = recognizeSpeaker(fileName, tolerance)
+function name = recognizeSpeaker(fileName)
 	addpath('feature-extraction','feature-matching');
 	mfcc = extractFeatures(fileName);
 	
@@ -12,8 +12,6 @@ function name = recognizeSpeaker(fileName, tolerance)
 		end
 	end
 	
-	
-	d = 2 * tolerance * ones(1,length(files));
 	for i = 1 : k
 		file = files{i};
 		printf('matching against: %s\n',file);

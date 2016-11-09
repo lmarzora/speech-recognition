@@ -25,22 +25,13 @@ function codeVector = lbg(training, epsilon,codeVectorCant)
 		d = Dstar; 
 		do
 			D = d;
-			for m = 1 : M
-				Q(m) = 1;
-				mn = norm(c(1,:) - training(m,:)).^2;
-				for n = 2 : N
-					err = norm(c(n,:) - training(m,:))^2;
-					if err < mn
-						mn = err;
-						Q(m) = n;
-					end
-				end
-			end
+			Q = getMapping(c,training);
+		
 			for n = 1:N
 				q = find(Q == n);
 				c(n,:) = sum(training(q,:))./length(q);
 			end
-			d = (1/M*k) * sum(norm(training - c(Q,:)).^2);
+			d = getDistortion(c,training,Q);
 
 		until (D - d)/D < epsilon
 	

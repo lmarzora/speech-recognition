@@ -1,6 +1,7 @@
 function mfcc = extractFeatures(filename)
 	pkg load signal
 	printf('Reading from %s\n', filename);
+	fflush(stdout);
 	[X fs nbits] = wavread(filename);
 
 	#FRAME SIGNAL

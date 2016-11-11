@@ -1,6 +1,7 @@
 function name = recognizeSpeaker(fileName)
 	addpath('feature-extraction','feature-matching');
-	mfcc = extractFeatures(fileName);
+	dir = strcat('../data/test/',fileName);
+	mfcc = extractFeatures(dir);
 	
 	dir = '../data/codebooks/';
 	allFiles = readdir(dir);

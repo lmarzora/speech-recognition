@@ -17,7 +17,7 @@ function addSpeaker(name)
 		codebook = lbg(mfcc, 1e-5, 16);
 	codebookDir = '../data/codebooks/';
 	codebookName = strcat(codebookDir,name);
-	printf('saving codebook in %s\n',s);
+	printf('saving codebook in %s\n',codebookName);
 	fflush(stdout);
 	dlmwrite(codebookName ,codebook);
 	

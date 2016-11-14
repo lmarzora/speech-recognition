@@ -29,8 +29,8 @@ function addSpeaker(name)
 		codebook = lbg(mfcc, 1e-5, 16);
 	codebookDir = '../data/codebooks/';
 
-	if ! exist(codeBookDir,'dir')
-		mkdir(codeBookDir);
+	if ! exist(codebookDir,'dir')
+		mkdir(codebookDir);
 	end
 
 	codebookName = strcat(codebookDir,name);

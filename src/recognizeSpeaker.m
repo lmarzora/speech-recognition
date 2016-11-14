@@ -4,21 +4,17 @@ function name = recognizeSpeaker(fileName)
 	mfcc = extractFeatures(dir);
 	
 	dir = '../data/codebooks/';
-	allFiles = readdir(dir);
-	k=0;
-	for i = 1 : length(allFiles)
-		if !strcmp(allFiles{i},'.') && !strcmp(allFiles{i},'..')
-			k++;
-			files{k} = allFiles{i};
-		end
-	end
+
+	matcher = '*.codebook';
 	
-	for i = 1 : k
+	files = glob(strcat(dir,matcher));
+	
+	for i = 1 : length(files);
 		file = files{i};
-		printf('matching against: %s\n',file);
+		speakerName{i} = getName(file);
+		printf('matching against: %s\n',speakerName{i});
 		fflush(stdout);
-		path = strcat(dir,file);
-		codebook = dlmread(path);
+		codebook = dlmread(file);
 
 		Q = getMapping(codebook,mfcc);
 		d(i) = getDistortion(codebook,mfcc,Q);
@@ -26,9 +22,9 @@ function name = recognizeSpeaker(fileName)
 		fflush(stdout);
 	end
 		
-	d
-	minDistortion = min(d)
-	i =find(d==minDistortion)
-	name = files{i};
+	minDistortion = min(d);
+	i =find(d==minDistortion);
+	name = speakerName{i};
+	printf('Speaker: %s with distortion %f\n',name,minDistortion);
 
 end

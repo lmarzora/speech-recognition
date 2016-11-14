@@ -8,9 +8,11 @@ function addSpeaker(name)
 		return;
 	end
 
-	files = readdir(dir);
+	matcher = '*.wav';
+	files = glob(strcat(dir,matcher));
+
 	
-	if(length(files) <= 2)
+	if(length(files) == 0)
 		printf('training samples not found\n');
 		return;
 	end
@@ -18,22 +20,19 @@ function addSpeaker(name)
 	mfcc = [];
 	for i= 1 : length(files)
 		fileName = files{i};
-			if !strcmp(fileName,'.') && !strcmp(fileName,'..')
-				path = strcat(dir,fileName);
-				mfcc = [mfcc;extractFeatures(path)];
-			end
+		mfcc = [mfcc;extractFeatures(fileName)];
 	end
 
 	printf('generating codebook\n');
 	fflush(stdout);
-		codebook = lbg(mfcc, 1e-5, 16);
+	codebook = lbg(mfcc, 1e-5, 16);
 	codebookDir = '../data/codebooks/';
 
 	if ! exist(codebookDir,'dir')
 		mkdir(codebookDir);
 	end
 
-	codebookName = strcat(codebookDir,name);
+	codebookName = strcat(codebookDir,name,'.codebook');
 	printf('saving codebook in %s\n',codebookName);
 	fflush(stdout);
 	dlmwrite(codebookName ,codebook);

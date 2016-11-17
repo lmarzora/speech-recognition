@@ -1,7 +1,9 @@
 function name = recognizeSpeaker(fileName)
 	addpath('feature-extraction','feature-matching');
-	dir = strcat('../data/test/',fileName);
-	mfcc = extractFeatures(dir);
+	pkg load audio;
+
+	[X, fs] = wavread(strcat('../data/test/',fileName));
+	mfcc = extractFeatures(X,fs);
 	
 	dir = '../data/codebooks/';
 

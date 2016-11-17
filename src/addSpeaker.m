@@ -9,14 +9,15 @@
 function addSpeaker(name)
 	pkg load audio;
 	addpath('feature-extraction','feature-matching');
+	
 	dir = sprintf('../data/training/%s/',name);
 
 	if (! exist(dir))
 		printf('The speaker training directory was not found\n')
 		printf('Please create directory %s in data/training/ and put training samples in it\n',name);
 		return;
-	end
-
+	end	
+	
 	matcher = '*.wav';
 	% gets all .wav files in directory dir
 	files = glob(strcat(dir,matcher));
@@ -33,7 +34,7 @@ function addSpeaker(name)
 	% mel frecuency cepstral coefficients
 	for (i = 1 : length(files))
 		filename = files{i};
-		printf('Readig from %s\n',filename);
+		printf('Reading from %s\n',filename);
 		[X fs] =  wavread(filename);
 		mfcc = [mfcc;extractFeatures(X,fs)];
 	end
@@ -45,6 +46,7 @@ function addSpeaker(name)
 	% algorithm
 	
 	codebook = lbg(mfcc, 1e-5, 16);
+	
 	codebookDir = '../data/codebooks/';
 
 	% if there is no codebook directory for this speaker a new
@@ -59,5 +61,6 @@ function addSpeaker(name)
 	fflush(stdout);
 	dlmwrite(codebookName ,codebook);
 	
-
+	
+	restoredefaultpath();
 end

@@ -59,13 +59,16 @@ function mfcc = extractFeatures(X, fs, frameLength = 0.025,
 		%dft necesita signal
 		% discrete cosine transform
 		% keep only first 12 coefficients
-		mfcc(j,1:12) = dct(melLogCoefs)(1:12);
+		mfcc(j,:) = dct(melLogCoefs)(1:12);
 
 	end
 	
 	if (useDeltas)
 		deltas = getDeltas(mfcc,cantFrames-N,N);
+		%append  horizontaly
 		mfcc = [mfcc(N+1:end-N,:),deltas];
+		%append verticaly
+		%mfcc = [mfcc;deltas];
 	end
 end
 

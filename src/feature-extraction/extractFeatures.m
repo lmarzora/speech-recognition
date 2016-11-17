@@ -8,14 +8,14 @@
 % minFrequency: lower filterbank frequecy limit in Hz (default 0)
 % maxFrequency: upper filterbak frequecy limit i Hz (default fs/2)
 % N: delta step (default 2)
-% useDeltas: use dynamic coeficients (default 0);
+% useDeltas: use dynamic coeficients (default 1);
 
-function mfcc = extractFeatures(X, fs, frameLength = 0.025, 
+function mfcc = extractFeatures(X, fs, frameLength = 0.025,
 	frameStep = 0.010, nFilterbanks = 26, minFrequency = 0,
-	maxFrequency = fs/2, N = 2, useDeltas = 0)
+	maxFrequency = fs/2, N = 2, useDeltas = 1)
 
 	pkg load signal
-	
+
 	#FRAME SIGNAL
 	[frames frameSamples cantFrames] = ...
 		frameSignal(frameLength,frameStep,X,fs);
@@ -50,7 +50,7 @@ function mfcc = extractFeatures(X, fs, frameLength = 0.025,
 	# MEL FRECUENCY WRAPPING
 		% calculate filterbank energies
 		melCoefs  = p * filterbanks;
-		
+
 	# CEPSTRUM
 
 		% check positive energies
@@ -62,13 +62,12 @@ function mfcc = extractFeatures(X, fs, frameLength = 0.025,
 		mfcc(j,:) = dct(melLogCoefs)(1:12);
 
 	end
-	
+
 	if (useDeltas)
-		deltas = getDeltas(mfcc,cantFrames-N,N);
+		deltas = getDeltas(mfcc,N);
 		%append  horizontaly
-		mfcc = [mfcc(N+1:end-N,:),deltas];
+		mfcc = [mfcc,deltas];
 		%append verticaly
 		%mfcc = [mfcc;deltas];
 	end
 end
-

@@ -59,7 +59,7 @@ function mfcc = extractFeatures(X, fs, frameLength = 0.025,
 		%dft necesita signal
 		% discrete cosine transform
 		% keep only first 12 coefficients
-		mfcc(j,:) = dct(melLogCoefs)(1:12);
+		mfcc(j,:) = dct(melLogCoefs,12);
 
 	end
 

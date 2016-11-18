@@ -18,7 +18,7 @@ function deltas = getDeltas(coefs,N)
 	deltas = zeros(nCoefs,coefSize);
 
 	% compute deltas
-	for t = N+1 : coefs + N
+	for t = N+1 : coefSize + N
 		up = zeros(1,coefSize);
 		down = 0;
 		for n = 1:N
@@ -32,7 +32,7 @@ end
 
 
 %	works
-%	for t = N+1 : coefs + Na
+%	for t = N+1 : coefSize + Na
 %		up = zeros(1,coefSize);
 %		down = 0;
 %		for n = 1:N

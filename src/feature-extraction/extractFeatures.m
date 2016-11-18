@@ -21,8 +21,8 @@ function mfcc = extractFeatures(X, fs, frameLength = 0.025,
 		frameSignal(frameLength,frameStep,X,fs);
 
 	# WINDOW SAMPLE check mono
-	% hanning window
-	h = hanning(frameSamples)';
+	% hamming window
+	h = hamming(frameSamples)';
 
 	% K: fast fourier transform bin size
 	% find previous power of 2

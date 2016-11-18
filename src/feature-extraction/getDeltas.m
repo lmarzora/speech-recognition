@@ -2,17 +2,22 @@
 % compute dinamic coeficients
 % coefs: mel frecuency cepstral coeficients
 % N: number of frames to look back and foward
+% returns deltas: dyamic coeficients
 % function deltas = getDeltas(coefs, nCoefs, N)
 
 function deltas = getDeltas(coefs,N)
-	n = 1:N;
+
 	[nCoefs coefSize]= size(coefs);
+	
+	% copy first and last static coeficient
 	leftPadding = repmat(coefs(1,:),N,1);
 	rightPadding = repmat(coefs(end,:),N,1);
+
+	% pad left and right
 	coefs = [rightPadding;coefs;leftPadding];
 	deltas = zeros(nCoefs,coefSize);
 
-
+	% compute deltas
 	for t = N+1 : coefs + N
 		up = zeros(1,coefSize);
 		down = 0;

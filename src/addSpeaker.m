@@ -1,12 +1,17 @@
 % addSpeaker
 % creates a new codebook or replaces an old one for a speaker
 
-% name: speaker name (A directory named %name% shoould exist and contain
-% one or more training audio recordings in wav format
+% name: speaker name (A directory named %name% shoould exist and contain one or more training audio recordings in wav format
+% useDeltas: use dynamic coeficients (default 2);
+% N: delta step (default 2)
+% frameLength: duration in seconds of frame (default 0.025)
+% frameStep: interval in secods between frames (default 0.010)
+% nFilterbanks: number of filterbanks to use (default 26)
+% minFrequency: lower filterbank frequecy limit in Hz (default 0)
 
 % requires audio package
 
-function addSpeaker(name)
+function addSpeaker(name, useDeltas=2, N=2, frameLength=0.025, frameStep=0.01, nFilterbanks=26, minFrequency=0)
 	pkg load audio;
 	addpath('feature-extraction','feature-matching');
 	
@@ -36,7 +41,12 @@ function addSpeaker(name)
 		filename = files{i};
 		printf('Reading from %s\n',filename);
 		[X fs] =  wavread(filename);
-		mfcc = [mfcc;extractFeatures(X,fs)];
+		maxFrequency = fs/2;
+		if(minFrequency >= maxFrequency)
+			printf('Invalid parameter minFrequency = %d greater than maxFrequency = %d\n',minFrequency, maxFrequency);
+			return;
+		end
+		mfcc = [mfcc;extractFeatures(X,fs, frameLength, frameStep, nFilterbanks, minFrequency, maxFrequency, N, useDeltas)];
 	end
 
 	printf('generating codebook\n');

@@ -12,7 +12,7 @@
 
 function mfcc = extractFeatures(X, fs, frameLength = 0.025,
 	frameStep = 0.010, nFilterbanks = 26, minFrequency = 0,
-	maxFrequency = fs/2, N = 2, useDeltas = 1)
+	maxFrequency = fs/2, N = 2, useDeltas = 2)
 
 	pkg load signal
 
@@ -69,5 +69,9 @@ function mfcc = extractFeatures(X, fs, frameLength = 0.025,
 		mfcc = [mfcc,deltas];
 		%append verticaly
 		%mfcc = [mfcc;deltas];
+		if (useDeltas == 2)
+			doubleDeltas = getDeltas(deltas,N);
+			mfcc=[mfcc,doubleDeltas];
+		end
 	end
 end

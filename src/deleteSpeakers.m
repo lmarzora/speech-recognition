@@ -5,6 +5,6 @@
 
 function deleteSpeakers(names)
 	for i = 1 : length(names)
-		deleteSpeakers(names{i});
+		deleteSpeaker(names{i});
 	end
 end
